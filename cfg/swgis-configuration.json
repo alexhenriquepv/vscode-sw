@@ -1,0 +1,54 @@
+{
+    "comments": {
+        "lineComment": "#",
+        "blockComment": []
+    },
+    "brackets": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"]
+    ],
+    "autoClosingPairs": [
+       { "open": "%", "close": "%" },
+       { "open": "{", "close": "}" },
+       { "open": "[", "close": "]" },
+       { "open": "(", "close": ")" },
+       { "open": "\"", "close": "\"", "notIn": ["string", "comment"] },
+       { "open": "`", "close": "`", "notIn": ["string", "comment"] }
+    ],
+    "surroundingPairs": [
+        ["%", "%"],
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""],
+        ["'", "'"]
+    ],
+    "Keywords": [ "title","description","end","requires","version","optional","language"],
+    "languages":{
+        "da_dk": "Dansk i Danmark",
+        "de_ch": "Deutsch in der Schweiz",
+        "de_de": "Deutsch in Deutschland",
+        "en_au": "English in Australia",
+        "en_gb": "English in United Kingdom",
+        "en_us": "English in United States",
+        "es_es": "Espanol de Espana",
+        "et_ee": "Eesti Eestis",
+        "fi_fi": "Suomea Suomessa",
+        "fr_be": "Francais en Belgique",
+        "fr_ca": "Francais au Canada",
+        "fr_ch": "Francais en Suisse",
+        "fr_fr": "Francais en France",
+        "it_it": "Italiano in Italia",
+        "jp_jp": "Japanese",
+        "ko_kr": "Korean",
+        "nl_be": "Vlaams in Belgie",
+        "nl_nl": "Hollands in Nederland",
+        "no_no": "Norsk i Norge",
+        "pt_br": "Portuges de Brasil",
+        "pt_pt": "Portugues de Portugal",
+        "sv_fi": "Svenska i Finland",
+        "sv_se": "Svenska i Sverige",
+        "zh_tw": "Chinese in ROC"
+    }
+}
