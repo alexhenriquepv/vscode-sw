@@ -17,13 +17,13 @@ function findProcess (callback) {
 
 function activate() {
 
-	const config = vscode.workspace.getConfiguration('swEnergisa')
+	const config = vscode.workspace.getConfiguration('vscodesw')
 
 	const alias_exe = `${config.productPath}/bin/x86/runalias.exe`
 	const sw_env = `${config.productPath}/config/environment.bat`
 	const gis_aliases = `${config.productPath}/config/gis_aliases`
 	
-	vscode.commands.registerCommand('swEnergisa.sessao', () => {
+	vscode.commands.registerCommand('vscodesw.sessao', () => {
 		findProcess((swProcesses) => {
 			if (swProcesses.length == 0) {
 				let runalias = `START ${alias_exe} -e "${sw_env}" -a "${gis_aliases}" swaf`
@@ -40,7 +40,7 @@ function activate() {
 		})
 	})
 
-	vscode.commands.registerCommand('swEnergisa.compila', () => {
+	vscode.commands.registerCommand('vscodesw.compila', () => {
 		findProcess((swProcesses) => {
 			if (swProcesses.length > 0) {
 				processWindows.focusWindow(swProcesses[0])

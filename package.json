@@ -1,24 +1,32 @@
 {
-	"name": "swEnergisa",
-	"displayName": "swEnergisa",
-	"description": "Etension for compile magik code",
-	"version": "0.0.1",
+	"name": "vscodesw",
+	"displayName": "VSCode Magik Smallworld",
+	"publisher": "alexhenriquepv",
+	"author": {
+		"name": "Alex Paiva"
+	},
+	"description": "Extension for compile magik code and language support",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/alexhenriquepv/vscode-sw"
+	},
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.29.0"
 	},
-	"categories": [
-		"Programing","compiler","magik"
-	],
+	"categories": ["Programming Languages"],
+	"keywords": ["magik","ge","energisa","smallworld","emacs"],
+	"icon": "src/wizard.png",
 	"activationEvents": [
-		"onCommand:swEnergisa.sessao",
-		"onCommand:swEnergisa.compila"
+		"onCommand:vscodesw.sessao",
+		"onCommand:vscodesw.compila"
 	],
-	"main": "./extension.js",
+	"main": "src/extension.js",
 	"contributes": {
 		"configuration": {
-			"title": "SW Energisa",
+			"title": "VSCodesw",
 			"properties": {
-				"swEnergisa.productPath": {
+				"vscodesw.productPath": {
 					"type": ["string", "null"],
 					"default": "C:/GE_Smallworld/Core430/product",
 					"description": "Specifies the path of gis.exe."
@@ -27,23 +35,23 @@
 		},
 		"commands": [
 			{
-				"command": "swEnergisa.sessao",
+				"command": "vscodesw.sessao",
 				"title": "MGK abrir sessão"
 			},
 			{
-				"command": "swEnergisa.compila",
+				"command": "vscodesw.compila",
 				"title": "MGK compilar código"
 			}
 		],
 		"menus": {
 			"editor/context": [
 				{
-					"command": "swEnergisa.sessao",
+					"command": "vscodesw.sessao",
 					"group": "navigation",
 					"when": "editorLangId == magik"
 				},
 				{
-					"command": "swEnergisa.compila",
+					"command": "vscodesw.compila",
 					"group": "navigation",
 					"when": "editorLangId == magik"
 				}
