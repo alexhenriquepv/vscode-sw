@@ -16,7 +16,7 @@ var process_id = ""
 var text_to_send = ""
 
 function help () {
-    WScript.Echo("run.cmd process_id text_to_send")
+    WScript.Echo("run-focus.cmd process_id text_to_send")
 }
 
 function parseArgs(){ 
@@ -32,7 +32,7 @@ function parseArgs(){
 
 function init () {
     parseArgs()
-    var result = sh.AppActivate(process_id)
+    var result = sh.AppActivate(process_id, True)
     WScript.Echo(result)
 
     if (result){
@@ -42,7 +42,7 @@ function init () {
     else {
         WScript.Echo("Failed to find application with pid " + process_id)
         sh.SendKeys(text_to_send + "{ENTER}${ENTER}")
-        WScript.Quit(1)
+        WScript.Quit(0)
     }
 }
 

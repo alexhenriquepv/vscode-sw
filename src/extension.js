@@ -26,14 +26,17 @@ function activate() {
 	vscode.commands.registerCommand('vscodesw.sessao', () => {
 		findProcess((swProcesses) => {
 			if (swProcesses.length == 0) {
-				let runalias = `START ${alias_exe} -e "${sw_env}" -a "${gis_aliases}" swaf`
+				let runalias = `${alias_exe} -e "${sw_env}" -a "${gis_aliases}" swaf`
 				exec(runalias, (err, stdout) => {
 					if (err) {
 						console.log(err)
-						vscode.window.showErrorMessage('Fail to start SW prompt')
+						vscode.window.showErrorMessage('Fail to start SW session')
 					}
 					else {
 						console.log(stdout)
+						setTimeout(() => {
+
+						}, 2000)
 					}
 				})
 			}
@@ -48,7 +51,7 @@ function activate() {
 				let current_file = vscode.window.activeTextEditor.document.fileName
 				let textToSend = `load_file{(}'${current_file}'{)}`
 
-				exec(`CALL ${__dirname}/src/run-focus.cmd ${swProcesses[0].pid} ${textToSend}`, (err, stdout) => {
+				exec(`CALL ${__dirname}/run-focus.cmd ${swProcesses[0].pid} ${textToSend}`, (err, stdout) => {
 					if (err) {
 						console.log(err)
 						vscode.window.showWarningMessage('Some probleming is ocurring on extension')
@@ -59,7 +62,7 @@ function activate() {
 				})
 			}
 			else {
-				vscode.window.showErrorMessage('SW process not found')
+				vscode.window.showErrorMessage('SW session not found')
 			}
 		})
 	})
