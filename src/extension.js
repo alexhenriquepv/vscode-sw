@@ -26,7 +26,7 @@ function activate() {
 	vscode.commands.registerCommand('vscodesw.sessao', () => {
 		findProcess((swProcesses) => {
 			if (swProcesses.length == 0) {
-				let runalias = `${alias_exe} -e "${sw_env}" -a "${gis_aliases}" swaf`
+				let runalias = `START ${alias_exe} -e "${sw_env}" -a "${gis_aliases}" swaf`
 				exec(runalias, (err, stdout) => {
 					if (err) {
 						console.log(err)
