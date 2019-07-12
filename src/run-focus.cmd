@@ -32,7 +32,7 @@ function parseArgs(){
 
 function init () {
     parseArgs()
-    var result = sh.AppActivate(process_id, True)
+    var result = sh.AppActivate(process_id)
     WScript.Echo(result)
 
     if (result){
