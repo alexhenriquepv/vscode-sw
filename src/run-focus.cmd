@@ -28,6 +28,7 @@ function parseArgs(){
     
     process_id = ARGS.Item(1)
     text_to_send = ARGS.Item(2)
+    text_to_send = text_to_send.replace('[SPACE]', ' ')
 }
 
 function init () {

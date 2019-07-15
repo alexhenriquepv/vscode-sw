@@ -47,7 +47,7 @@ function activate() {
 
 				let current_file = vscode.window.activeTextEditor.document.fileName
 				let textToSend = 'load_file{(}'.concat(`'`).concat(current_file).concat(`'`).concat('{)}')
-				console.log("txttosend",textToSend)
+				textToSend = textToSend.replace(' ', '[SPACE]')
 				exec(`CALL ${__dirname}/run-focus.cmd ${swProcesses[0].pid} ${textToSend}`, (err, stdout) => {
 					if (err) {
 						console.log(err)

@@ -1,4 +1,4 @@
-# Extension for compile magik code with one clik :)
+# Extension for compile magik code with one click :)
 
 ![Capa da extensão](https://magikvideo.files.wordpress.com/2019/07/ext2.png)
 

@@ -10,7 +10,7 @@
 		"type": "git",
 		"url": "https://github.com/alexhenriquepv/vscode-sw"
 	},
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"engines": {
 		"vscode": "^1.29.0"
 	},
