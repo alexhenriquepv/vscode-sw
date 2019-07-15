@@ -34,9 +34,6 @@ function activate() {
 					}
 					else {
 						console.log(stdout)
-						setTimeout(() => {
-
-						}, 2000)
 					}
 				})
 			}
@@ -49,8 +46,8 @@ function activate() {
 				processWindows.focusWindow(swProcesses[0])
 
 				let current_file = vscode.window.activeTextEditor.document.fileName
-				let textToSend = `load_file{(}'${current_file}'{)}`
-
+				let textToSend = 'load_file{(}'.concat(`'`).concat(current_file).concat(`'`).concat('{)}')
+				console.log("txttosend",textToSend)
 				exec(`CALL ${__dirname}/run-focus.cmd ${swProcesses[0].pid} ${textToSend}`, (err, stdout) => {
 					if (err) {
 						console.log(err)

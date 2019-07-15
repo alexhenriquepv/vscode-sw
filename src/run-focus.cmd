@@ -32,6 +32,7 @@ function parseArgs(){
 
 function init () {
     parseArgs()
+    WScript.Echo(text_to_send)
     var result = sh.AppActivate(process_id)
     WScript.Echo(result)
 

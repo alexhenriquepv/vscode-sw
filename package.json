@@ -43,6 +43,18 @@
 				"title": "MGK compilare current code"
 			}
 		],
+		"keybindings":[
+			{
+				"command": "vscodesw.sessao",
+				"key": "Alt+,",
+				"when": "editorLangId == magik && editorTextFocus"
+			},
+			{
+				"command": "vscodesw.compila",
+				"key": "Alt+.",
+				"when": "editorLangId == magik && editorTextFocus"
+			}
+		],
 		"menus": {
 			"editor/context": [
 				{
