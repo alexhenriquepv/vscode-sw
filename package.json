@@ -10,7 +10,7 @@
 		"type": "git",
 		"url": "https://github.com/alexhenriquepv/vscode-sw"
 	},
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"engines": {
 		"vscode": "^1.29.0"
 	},
@@ -40,7 +40,7 @@
 			},
 			{
 				"command": "vscodesw.compila",
-				"title": "MGK compilare current code"
+				"title": "MGK compile current code"
 			}
 		],
 		"keybindings":[
