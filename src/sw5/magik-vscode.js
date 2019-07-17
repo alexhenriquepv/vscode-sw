@@ -113,10 +113,13 @@ class MagikVSCode {
   }
 
   _openSession () {
+    const config = vscode.workspace.getConfiguration('magik-vscode')
+    const gis_exe = `${config.productPath}/bin/x86/runalias.exe`
+    const alias_path = `${config.productPath}/config/gis_aliases`
+    const alias = config.alias
+
     this._terminal = vscode.window.createTerminal(
-      'magik-prompt',
-      'C:/GE_Smallworld/Core520/core/bin/x86/runalias.exe',
-      '-a C:/GE_Smallworld/Core520/core/config/gis_aliases swaf'
+      'magik-prompt', gis_exe, `-a ${alias_path} ${alias}`
     )
 
     vscode.window.onDidCloseTerminal((e) => {

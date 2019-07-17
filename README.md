@@ -1,5 +1,5 @@
 # VSCode Magik Smallworld
-Extension for compile magik code with one click :)
+### Extension for compile magik code with one click :)
 ![Extension Image](https://magikvideo.files.wordpress.com/2019/07/ext2.png)
 
 ## Installation
@@ -7,24 +7,24 @@ Extension for compile magik code with one click :)
 2. Enable `Editor: Format on Type` in the VSCode settings to allow adding _ and auto indentation.
 
 ## Usage
-1. Edit your settings your settings.
-    File -> Preferences -> Settings -> Magik Smallworld.
-    Select your Smallworld version.
-    Select the Smallworld instalation path.
+* Edit your settings your settings.
+    - File -> Preferences -> Settings -> Magik Smallworld.
+    - Select your Smallworld version.
+    - Select the Smallworld instalation path.
 
     ![Extension Settings](/icons/settings.png)
 
-2. Open a Magik file on VSCode editor.
+* Open a Magik file on VSCode editor.
 
-3. Open a Magik session.
+* Open a Magik session.
     ![Extension Open session](/icons/session.png)
 
-4. (Optional) Load the file vscode_dev.magik at the Magik prompt (**Alt+M**).
+* (Optional) Load the file vscode_dev.magik at the Magik prompt (**Alt+M**).
     This will load a set of utility procs to support navigating and compiling Magik in VS Code.
     (vscode_dev.magik is supplied in this extension - I would recommend copying this to a convenient location to load after a session starts or load in .magik)
     The dev procs mfind() (aka mf()) and open_class() (aka oc()) will then be available at the Magik prompt.
 
-5. Execute the code.
+* Execute the code.
     ![Extension compile file](/icons/compile.png)
 
 ## Features
@@ -112,10 +112,3 @@ The linting can be enable/diabled using the setting `magik-vscode.enableLinting`
 
 Please add issues here:
 https://github.com/alexhenriquepv/vscode-sw/issues
-
-## Release Notes
-
-### 0.0.7
-Added support to version 5 of smallworld.
-
-For more information access the blog [magik.video.blog](magik.video.blog)

@@ -2,7 +2,7 @@
     "name": "vscodesw",
     "displayName": "Magik Smallworld",
     "description": "VSCode extension for compile magik code",
-    "version": "0.0.7",
+    "version": "0.0.9",
     "publisher": "alexhenriquepv",
     "author": "Alex Paiva",
     "repository": {
@@ -15,7 +15,7 @@
     "categories": [
         "Programming Languages"
     ],
-    "icon": "./icons/wizard.png",
+    "icon": "icons/wizard.png",
     "activationEvents": [
         "onLanguage:magik",
         "onCommand:magik.refreshSymbols",
@@ -255,6 +255,10 @@
                     "type": "string",
                     "default": "C:/GE_Smallworld/Core520/core",
                     "description": "The Core instalation directory"
+                },
+                "magik-vscode.alias": {
+                    "type":"string",
+                    "default": "swaf"
                 },
                 "magik-vscode.enableAutoIndentation": {
                     "type": "boolean",
