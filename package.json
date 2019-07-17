@@ -1,142 +1,296 @@
 {
-	"name": "vscodesw",
-	"displayName": "VSCode Magik Smallworld",
-	"publisher": "alexhenriquepv",
-	"author": {
-		"name": "Alex Paiva"
-	},
-	"description": "Extension for compile magik code and language support",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/alexhenriquepv/vscode-sw"
-	},
-	"version": "0.0.7",
-	"engines": {
-		"vscode": "^1.29.0"
-	},
-	"categories": ["Programming Languages"],
-	"keywords": ["magik","ge","energisa","smallworld","emacs"],
-	"icon": "src/wizard.png",
-	"activationEvents": [
-		"onCommand:vscodesw.sessao",
-		"onCommand:vscodesw.compila"
-	],
-	"main": "src/extension.js",
-	"contributes": {
-		"configuration": {
-			"title": "VSCodesw",
-			"properties": {
-				"vscodesw.productPath": {
-					"type": ["string", "null"],
-					"default": "C:/GE_Smallworld/Core430/product",
-					"description": "Specifies the path of gis.exe."
-				}
-			}
-		},
-		"commands": [
-			{
-				"command": "vscodesw.sessao",
-				"title": "MGK open session"
-			},
-			{
-				"command": "vscodesw.compila",
-				"title": "MGK compile current code"
-			}
-		],
-		"keybindings":[
-			{
-				"command": "vscodesw.sessao",
-				"key": "Alt+,",
-				"when": "editorLangId == magik && editorTextFocus"
-			},
-			{
-				"command": "vscodesw.compila",
-				"key": "Alt+.",
-				"when": "editorLangId == magik && editorTextFocus"
-			}
-		],
-		"menus": {
-			"editor/context": [
-				{
-					"command": "vscodesw.sessao",
-					"group": "navigation",
-					"when": "editorLangId == magik"
-				},
-				{
-					"command": "vscodesw.compila",
-					"group": "navigation",
-					"when": "editorLangId == magik"
-				}
-			]
-		},
-		"languages": [
-			{
-				"id": "magik",
-				"aliases": [
-					"magik",
-					"Smallworld Magik",
-					"Energisa"
-				],
-				"extensions": [
-					".magik"
-				],
-				"filenames": [],
-				"configuration": "./cfg/magik-configuration.json"
-			},
-			{
-				"id": "swgis",
-				"aliases": [
-					"swgis",
-					"Smallworld GIS"
-				],
-				"extensions": [
-					".msg"
-				],
-				"filenames": [
-					"gis_aliases",
-					"product.def",
-					"module.def",
-					"load_list.txt",
-					"patch_list.txt"
-				],
-				"configuration": "./cfg/swgis-configuration.json"
-			}
-		],
-		"grammars": [
-			{
-				"language": "magik",
-				"scopeName": "source.magik",
-				"path": "./cfg/magik.grammars.json"
-			},
-			{
-				"language": "swgis",
-				"scopeName": "source.swgis",
-				"path": "./cfg/swgis.grammars.json"
-			}
-		],
-		"snippets": [
-			{
-				"language": "magik",
-				"path": "./cfg/magik.snippets.json"
-			},
-			{
-				"language": "swgis",
-				"path": "./cfg/swgis.snippets.json"
-			}
-		]
-	},
-	"scripts": {
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "node ./node_modules/vscode/bin/test"
-	},
-	"devDependencies": {
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
-		"eslint": "^5.13.0",
-		"@types/node": "^10.12.21",
-		"@types/mocha": "^2.2.42"
-	},
-	"dependencies": {
-		"node-process-windows": "0.0.2"
-	}
+    "name": "vscodesw",
+    "displayName": "Magik Smallworld",
+    "description": "VSCode extension for compile magik code",
+    "version": "0.0.7",
+    "publisher": "alexhenriquepv",
+    "author": "Alex Paiva",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/alexhenriquepv/vscode-sw"
+    },
+    "engines": {
+        "vscode": "^1.23.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "icon": "./icons/wizard.png",
+    "activationEvents": [
+        "onLanguage:magik",
+        "onCommand:magik.refreshSymbols",
+        "onCommand:magik.compileExtensionMagik"
+    ],
+    "main": "./src/extension",
+    "contributes": {
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "magik.opensession",
+                    "group": "navigation",
+                    "when": "editorLangId == magik"
+                },
+                {
+                    "command": "magik.compileFile",
+                    "group": "navigation",
+                    "when": "editorLangId == magik"
+                }
+            ]
+        },
+        "languages": [
+            {
+                "id": "magik",
+                "aliases": [
+                    "Magik",
+                    "magik"
+                ],
+                "extensions": [
+                    ".magik"
+                ],
+                "configuration": "./languages/magik-configuration.json"
+            },
+            {
+                "id": "message",
+                "aliases": [
+                    "Message",
+                    "message"
+                ],
+                "extensions": [
+                    ".msg"
+                ],
+                "configuration": "./languages/message-configuration.json"
+            },
+            {
+                "id": "definition",
+                "aliases": [
+                    "Definition",
+                    "definition"
+                ],
+                "extensions": [
+                    ".def"
+                ],
+                "configuration": "./definition-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "magik",
+                "scopeName": "source.magik",
+                "path": "./grammars/magik.tmLanguage.json"
+            },
+            {
+                "language": "message",
+                "scopeName": "text.message",
+                "path": "./grammars/message.tmLanguage.json"
+            },
+            {
+                "language": "definition",
+                "scopeName": "text.definition",
+                "path": "./grammars/definition.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "magik",
+                "path": "./snippets/magik.snippets.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "magik.opensession",
+                "title": "Magik Open Session"
+            },
+            {
+                "command": "magik.goto",
+                "title": "Magik Goto"
+            },
+            {
+                "command": "magik.compileMethod",
+                "title": "Magik Compile Method"
+            },
+            {
+                "command": "magik.compileFile",
+                "title": "Magik Compile File"
+            },
+            {
+                "command": "magik.compileSelection",
+                "title": "Magik Compile Selection"
+            },
+            {
+                "command": "magik.indentRegion",
+                "title": "Magik Indent Region"
+            },
+            {
+                "command": "magik.indentFile",
+                "title": "Magik Indent File"
+            },
+            {
+                "command": "magik.formatRegion",
+                "title": "Magik Format Region"
+            },
+            {
+                "command": "magik.formatFile",
+                "title": "Magik Format File"
+            },
+            {
+                "command": "magik.checkFile",
+                "title": "Magik Check File"
+            },
+            {
+                "command": "magik.refreshSymbols",
+                "title": "Magik Refresh Symbols"
+            },
+            {
+                "command": "magik.gotoPreviousDefinition",
+                "title": "Magik Go To Previous Definition"
+            },
+            {
+                "command": "magik.gotoNextDefinition",
+                "title": "Magik Go To Next Definition"
+            },
+            {
+                "command": "magik.runTest",
+                "title": "Magik Run Test"
+            },
+            {
+                "command": "magik.compileExtensionMagik",
+                "title": "Magik Compile Extension Code"
+            },
+            {
+                "command": "magik.newBuffer",
+                "title": "Magik New Buffer"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "magik.opensession",
+                "key": "alt+.",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.goto",
+                "key": "f3",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.compileMethod",
+                "key": "f7",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.compileFile",
+                "key": "ctrl+f7",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.compileSelection",
+                "key": "f8",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.indentRegion",
+                "key": "ctrl+i",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.indentFile",
+                "key": "ctrl+shift+i",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.formatRegion",
+                "key": "alt+f",
+                "when": "editorTextFocus && editorLangId == magik"
+            },
+            {
+                "command": "magik.formatFile",
+                "key": "shift+alt+f",
+                "when": "editorTextFocus && editorLangId == magik"
+            },
+            {
+                "command": "magik.checkFile",
+                "key": "ctrl+shift+f7",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.refreshSymbols",
+                "key": "alt+t"
+            },
+            {
+                "command": "magik.gotoPreviousDefinition",
+                "key": "alt+pageup",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.gotoNextDefinition",
+                "key": "alt+pagedown",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.runTest",
+                "key": "alt+f7",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "magik.compileExtensionMagik",
+                "key": "alt+m"
+            },
+            {
+                "command": "magik.newBuffer",
+                "key": "alt+n"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Magik Smallworld",
+            "properties": {
+                "magik-vscode.version": {
+                    "type": "integer",
+                    "default": "5",
+                    "description": "SmallWorld version",
+                    "minimum": 4,
+                    "maximum": 5
+                },
+                "magik-vscode.productPath": {
+                    "type": "string",
+                    "default": "C:/GE_Smallworld/Core520/core",
+                    "description": "The Core instalation directory"
+                },
+                "magik-vscode.enableAutoIndentation": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable Magik code auto indenting."
+                },
+                "magik-vscode.enableLinting": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable Magik code linting."
+                }
+            }
+        },
+        "iconThemes": [
+            {
+                "id": "magik-icons",
+                "label": "Magik Icons",
+                "path": "./themes/magik-icons.json"
+            }
+        ]
+    },
+    "scripts": {
+        "lint": "eslint \"./src/**/*.js\"",
+        "lint:fix": "npm run lint -- --fix",
+        "prettier": "prettier --write \"src/**/*.js\""
+    },
+    "devDependencies": {
+        "eslint": "5.9.0",
+        "eslint-config-airbnb": "17.1.0",
+        "eslint-config-airbnb-base": "13.1.0",
+        "eslint-config-prettier": "3.3.0",
+        "eslint-plugin-import": "2.14.0",
+        "eslint-plugin-prettier": "3.0.0",
+        "prettier": "1.15.3"
+    },
+    "dependencies": {
+        "node-process-windows": "0.0.2"
+    }
 }

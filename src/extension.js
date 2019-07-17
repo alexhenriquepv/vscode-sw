@@ -1,75 +1,25 @@
+'use strict';
+
 const vscode = require('vscode')
-const { exec } = require('child_process')
-const processWindows = require("node-process-windows")
-const swName = 'sw_magik_win32'
+const MagikVSCodeSW4 = require('./sw4/magik-vscode');
+const MagikVSCodeSW5 = require('./sw5/magik-vscode');
+const MagikLinter = require('./magik-linter');
 
-function findProcess (callback) {
-	processWindows.getProcesses((err, processes) => {
-		if (err) {
-			console.log(err)
-		}
-		else {
-			let swProcesses = processes.filter(p => p.processName.indexOf(swName) >= 0)
-			if (typeof callback == 'function') callback(swProcesses)
-		}
-	})
-}
+function activate(context) {
+  const config = vscode.workspace.getConfiguration('magik-vscode')
 
-function activate() {
+  let magikVSCode
 
-	const config = vscode.workspace.getConfiguration('vscodesw')
+  if (config.version == 4) {
+    magikVSCode = new MagikVSCodeSW4(context)
+  }
+  else {
+    magikVSCode = new MagikVSCodeSW5(context)
+  }
 
-	const alias_exe = `${config.productPath}/bin/x86/runalias.exe`
-	const sw_env = `${config.productPath}/config/environment.bat`
-	const gis_aliases = `${config.productPath}/config/gis_aliases`
-	
-	vscode.commands.registerCommand('vscodesw.sessao', () => {
-		findProcess((swProcesses) => {
-			if (swProcesses.length == 0) {
-				let runalias = `START ${alias_exe} -e "${sw_env}" -a "${gis_aliases}" swaf`
-				exec(runalias, (err, stdout) => {
-					if (err) {
-						console.log(err)
-						vscode.window.showErrorMessage('Fail to start SW session')
-					}
-					else {
-						console.log(stdout)
-					}
-				})
-			}
-		})
-	})
-
-	vscode.commands.registerCommand('vscodesw.compila', () => {
-		findProcess((swProcesses) => {
-			if (swProcesses.length > 0) {
-				processWindows.focusWindow(swProcesses[0])
-
-				let current_file = vscode.window.activeTextEditor.document.fileName
-				let textToSend = 'load_file{(}'.concat(`'`).concat(current_file).concat(`'`).concat('{)}')
-				textToSend = textToSend.replace(' ', '[SPACE]')
-				exec(`CALL ${__dirname}/run-focus.cmd ${swProcesses[0].pid} ${textToSend}`, (err, stdout) => {
-					if (err) {
-						console.log(err)
-						vscode.window.showWarningMessage('Some probleming is ocurring on extension')
-					}
-					else {
-						console.log(stdout)
-					}
-				})
-			}
-			else {
-				vscode.window.showErrorMessage('SW session not found')
-			}
-		})
-	})
+  vscode.window.setStatusBarMessage(`Smallworld version ${config.version}`)
+  
+  new MagikLinter(magikVSCode, context)
 }
 
 exports.activate = activate
-
-function deactivate() {}
-
-module.exports = {
-	activate,
-	deactivate
-}
